@@ -28,15 +28,15 @@ The analysis used three tables:
 
 ### Highest Rated Movies
 The Shawshank Redemption achieved the highest average rating among movies with more than 100 ratings.
-![Highest Rated Movies](Screenshot Highest rated moves.png)
+![Highest Rated Movies](highest-rated-movies.png)
 
 ### Most Popular Movies
 Forrest Gump received the highest number of ratings, suggesting broad audience engagement.
-![most popular movies](Screenshot Most popular Movies.png)
+![Most Popular Movies](most-popular-movies.png)
 
 ### Hidden Gems
 Vanya on 42nd Street emerged as a potentially underrated movie with strong audience ratings despite low engagement.
-![hidden Gems](Screenshot hidden gem.png)
+![Hidden Gems](hidden-gems.png)
 
 ## Conclusion
 The analysis showed that highly rated movies are not always the most popular, and several critically successful films came from the mid-1990s.
