@@ -1,1 +1,180 @@
+```sql
+-- =========================================================
+-- Movie Ratings & Audience Analysis Using SQL
+-- Portfolio Project
+-- =========================================================
+
+-- =========================================================
+-- TABLES USED
+-- movies(movieId, title, genres)
+-- ratings(userId, movieId, rating, timestamp)
+-- tags(userId, movieId, tag, timestamp)
+-- =========================================================
+
+
+
+-- =========================================================
+-- 1. HIGHEST RATED MOVIES
+-- Objective:
+-- Identify the highest rated movies while filtering out
+-- movies with low sample sizes.
+-- =========================================================
+
+SELECT
+    m.title,
+    COUNT(r.rating) AS rating_count,
+    ROUND(AVG(r.rating), 2) AS avg_rating
+FROM movies m
+JOIN ratings r
+    ON m.movieId = r.movieId
+GROUP BY m.title
+HAVING COUNT(r.rating) > 100
+ORDER BY avg_rating DESC
+LIMIT 10;
+
+
+
+-- =========================================================
+-- FINDINGS:
+--
+-- The Shawshank Redemption achieved the highest average
+-- rating among movies with more than 100 ratings.
+--
+-- Filtering for movies with over 100 ratings reduced
+-- misleading averages caused by small sample sizes.
+-- =========================================================
+
+
+
+-- =========================================================
+-- 2. MOST POPULAR MOVIES
+-- Objective:
+-- Identify movies with the highest audience engagement
+-- based on total number of ratings.
+-- =========================================================
+
+SELECT
+    m.title,
+    COUNT(r.rating) AS rating_count,
+    ROUND(AVG(r.rating), 2) AS avg_rating
+FROM movies m
+JOIN ratings r
+    ON m.movieId = r.movieId
+GROUP BY m.title
+HAVING COUNT(r.rating) > 100
+ORDER BY rating_count DESC, avg_rating DESC
+LIMIT 10;
+
+
+
+-- =========================================================
+-- FINDINGS:
+--
+-- Forrest Gump received the highest number of ratings,
+-- suggesting widespread audience engagement.
+--
+-- However, The Shawshank Redemption combined both high
+-- engagement and the highest average rating, indicating
+-- strong audience approval alongside popularity.
+--
+-- Several top-performing movies were released in 1994,
+-- suggesting it was a particularly strong year for
+-- critically successful films within this dataset.
+-- =========================================================
+
+
+
+-- =========================================================
+-- 3. HIDDEN GEMS ANALYSIS
+-- Objective:
+-- Identify highly rated movies with relatively low
+-- audience engagement.
+-- =========================================================
+
+SELECT
+    m.title,
+    COUNT(r.rating) AS rating_count,
+    ROUND(AVG(r.rating), 2) AS avg_rating
+FROM movies m
+JOIN ratings r
+    ON m.movieId = r.movieId
+GROUP BY m.title
+HAVING COUNT(r.rating) BETWEEN 5 AND 10
+    AND AVG(r.rating) > 4
+ORDER BY rating_count DESC, avg_rating DESC;
+
+
+
+-- =========================================================
+-- FINDINGS:
+--
+-- Vanya on 42nd Street (1994) emerged as a potentially
+-- underrated film with a strong average audience rating
+-- despite relatively low engagement.
+--
+-- While the sample size remains small, the movie
+-- maintained positive audience reception among viewers
+-- who rated it.
+-- =========================================================
+
+
+
+-- =========================================================
+-- 4. MOST COMMON TAGS
+-- Objective:
+-- Explore the most frequently used movie tags to better
+-- understand audience descriptions and themes.
+-- =========================================================
+
+SELECT
+    t.tag,
+    COUNT(*) AS tag_count
+FROM tags t
+GROUP BY t.tag
+ORDER BY tag_count DESC
+LIMIT 10;
+
+
+
+-- =========================================================
+-- 5. MOST TAGGED MOVIES
+-- Objective:
+-- Identify movies generating the most audience discussion
+-- and descriptive tagging activity.
+-- =========================================================
+
+SELECT
+    m.title,
+    COUNT(t.tag) AS tag_count
+FROM movies m
+JOIN tags t
+    ON m.movieId = t.movieId
+GROUP BY m.title
+ORDER BY tag_count DESC
+LIMIT 10;
+
+
+
+-- =========================================================
+-- PROJECT CONCLUSION
+--
+-- This analysis explored audience preferences using movie
+-- ratings, engagement metrics, and descriptive tags.
+--
+-- Key findings showed that:
+--
+-- - Highly rated movies are not always the most popular
+-- - Strong sample sizes improve rating reliability
+-- - Some lower-engagement films maintain excellent ratings
+-- - 1994 contained several consistently successful films
+--
+-- SQL techniques used:
+-- - JOIN
+-- - GROUP BY
+-- - HAVING
+-- - ORDER BY
+-- - Aggregate Functions
+-- - Filtering
+-- =========================================================
+```
 
